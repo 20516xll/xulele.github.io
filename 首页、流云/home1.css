@@ -1,0 +1,495 @@
+/* 高级古风配色方案 */
+		:root {
+			--primary: #795548;      /* 深木色 */
+			--secondary: #C62828;    /* 赤红色 */
+			--accent: #2E7D32;       /* 青竹色 */
+			--bg-color: #F5F5DC;     /* 宣纸色 */
+			--text-color: #3E2723;   /* 墨色 */
+			--border-color: #A1887F; /* 木边框色 */
+			--gold: #D4AF37;         /* 描金色 */
+		}
+		
+		body {
+			background-color: var(--bg-color);
+			color: var(--text-color);
+			
+			background-attachment: fixed;
+			background-size: cover;
+			background-position: center;
+			background-blend-mode: overlay;
+			line-height: 1.6;
+		}
+		/* 主容器样式优化 */
+		.container1{
+			display: flex;
+			height:800px;
+			padding: 0 60px;
+			margin-top: 30px;
+			gap: 20px;
+		}
+		
+		.left{
+			flex:5.5;
+			background-color:transparent;
+			padding:15px;
+			position: relative;
+		}
+		
+		/* 轮播容器高级样式 */
+		.container{
+			height:41%;
+			width: 100%;
+			background: rgba(255, 255, 255, 0.85);
+			box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+			border-radius: 12px;
+			overflow: hidden;
+			position: relative;
+			border: 1px solid var(--border-color);
+			transition: all 0.5s ease;
+		}
+		
+		.container:hover {
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+		}
+		
+		/* 古风装饰边角 */
+		.container::before, 
+		.container::after,
+		.story::before, 
+		.story::after {
+			content: "";
+			position: absolute;
+			width: 40px;
+			height: 40px;
+			border-color: var(--gold);
+			border-style: solid;
+			opacity: 0.7;
+			pointer-events: none;
+		}
+		
+		.container::before { top: 15px; left: 15px; border-width: 2px 0 0 2px; }
+		.container::after { bottom: 15px; right: 15px; border-width: 0 2px 2px 0; }
+		.story::before { top: 15px; left: 15px; border-width: 2px 0 0 2px; }
+		.story::after { bottom: 15px; right: 15px; border-width: 0 2px 2px 0; }
+		
+		/* 标题栏样式 */
+		.center{
+			height: 5%;
+			color: var(--primary);
+			font-size: 24px;
+			font-weight: 700;
+			display: flex;
+			align-items: center;
+			padding-left: 20px;
+			padding-top: 15px;
+			margin: 15px 0;
+			font-family: "Ma Shan Zheng", cursive;
+			letter-spacing: 2px;
+			position: relative;
+		}
+		
+		.center::before {
+			content: "❦";
+			margin-right: 12px;
+			color: var(--secondary);
+		}
+		
+		.center::after {
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: 1px;
+			background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+		}
+		
+		.bottom{
+			height:54%;
+			width: 100%;
+			background-color:transparent;
+			overflow: hidden;
+		}
+		
+		.right{
+			flex:4.5;
+			padding: 15px;
+			background-color: transparent;
+			position: relative;
+		}
+		
+		/* 故事卡片高级样式 */
+		.story{
+			background-color: rgba(255, 255, 255, 0.9);
+			height:100%;
+			border-radius: 12px;
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			border: 1px solid var(--border-color);
+			position: relative;
+			box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+			transition: all 0.5s ease;
+		}
+		
+		.story:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+		}
+		
+		.story1{
+			height:86%;
+			overflow: hidden;
+			position: relative;
+		}
+		
+		/* 图片渐变遮罩 */
+		.story1::after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 40%;
+			background: linear-gradient(transparent, rgba(0,0,0,0.7));
+			z-index: 1;
+		}
+		
+		.story_caption {
+			position: absolute;
+			bottom: 30px;
+			left: 30px;
+			color: white;
+			z-index: 2;
+			font-family: "Noto Serif SC", serif;
+			max-width: 80%;
+		}
+		
+		.story_caption h3 {
+			font-size: 22px;
+			margin-bottom: 8px;
+			text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+			position: relative;
+			padding-bottom: 8px;
+		}
+		
+		.story_caption h3::after {
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 50px;
+			height: 1px;
+			background-color: rgba(255,255,255,0.7);
+		}
+		
+		.story_caption p {
+			font-size: 15px;
+			text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+			line-height: 1.6;
+		}
+		
+		.story_image{
+			width:100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform 7s ease;
+		}
+		
+		.story:hover.story_image {
+			transform: scale(1.1);
+		}
+		
+		.story2{
+			height:14%;
+			padding: 0 25px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			box-sizing: border-box;
+			background-color: rgba(245, 240, 230, 0.95);
+		}
+		
+		.story2_title{
+			font-size: 20px;
+			font-weight: 700;
+			color: var(--primary);
+			font-family: "Noto Serif SC", serif;
+			margin-bottom: 5px;
+		}
+		
+		.story2_desc{
+			font-size: 13px;
+			color: var(--text-color);
+			font-family: "Noto Serif SC", serif;
+			margin-bottom: 10px;
+		}
+		
+		/* 修改按钮样式 */
+.story2_btn{
+    background-color: var(--accent); /* 改为青竹色，更符合古风主题 */
+    color: white;
+    border: none;
+    padding: 6px 12px; /* 减小尺寸 */
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Noto Serif SC", serif;
+    transition: all 0.3s ease;
+    border: 1px solid #1B5E20; /* 深绿色边框 */
+    position: relative;
+    overflow: hidden;
+    align-self: flex-end; /* 靠右对齐 */
+    margin-left: auto; /* 自动左边距，实现右对齐 */
+}
+
+/* 保持其他按钮效果不变 */
+.story2_btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: all 0.5s ease;
+}
+
+.story2_btn:hover {
+    background-color: #1B5E20; /* 深绿色 hover 效果 */
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(27, 94, 32, 0.3);
+}
+		.story2_btn::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+			transition: all 0.5s ease;
+		}
+		
+		.story2_btn:hover {
+			background-color: #B71C1C;
+			transform: translateY(-2px);
+			box-shadow: 0 5px 15px rgba(183, 28, 28, 0.3);
+		}
+		
+		.story2_btn:hover::before {
+			left: 100%;
+		}
+		
+		/* 产品表格样式 */
+		table{
+			border-collapse: separate;
+			border-spacing: 15px;
+			background-color: transparent;
+			border:none;
+			width: 100%;
+			height:100%;
+		}
+		
+		.td1{
+			border:none;
+			padding:0;
+		}
+		
+		/* 产品卡片高级样式 */
+		.sell{
+			display: flex;
+			width: 100%;
+			border-radius: 10px;
+			border:1px solid var(--border-color);
+			overflow: hidden;
+			background-color: white;
+			transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+			position: relative;
+		}
+		
+		.sell::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 3px;
+			background-color: var(--accent);
+			transform: scaleX(0);
+			transition: transform 0.3s ease;
+			transform-origin: left center;
+		}
+		
+		.sell:hover {
+			transform: translateY(-8px);
+			box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+		}
+		
+		.sell:hover::before {
+			transform: scaleX(1);
+		}
+		
+		.sell_left{
+			flex:8;
+			height: 190px;
+			background-color: antiquewhite;
+			overflow: hidden;
+			border-right: 1px solid var(--border-color);
+		}
+		
+		.good_img{
+			width:100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform 0.7s ease;
+			transform-origin: center center;
+		}
+		
+		.sell_left:hover.good_img {
+			transform: scale(1.15);
+		}
+		
+		.sell_right{
+			flex:2;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			padding: 10px 5px;
+			writing-mode: vertical-rl;
+			background-color: rgba(245, 240, 230, 0.7);
+		}
+		
+		.product_name {
+			font-size: 16px;
+			font-weight:700;
+			color: var(--primary);
+			font-family: "Noto Serif SC", serif;
+			margin-bottom: 10px;
+			letter-spacing: 1px;
+			position: relative;
+			padding-right: 10px;
+		}
+		
+		.product_name::after {
+			content: "";
+			position: absolute;
+			right: 0;
+			top: 0;
+			height: 100%;
+			width: 1px;
+			background-color: rgba(139, 90, 43, 0.3);
+		}
+		
+		.product_price {
+			font-size: 15px;
+			color: var(--secondary);
+			font-family: "Noto Serif SC", serif;
+			font-weight: 600;
+			padding-right: 10px;
+		}
+		
+		/* 匠人自述区域 */
+		.container3 {
+			width: 70%;
+			margin: 40px auto;
+			text-align: center;
+			border: 1px solid var(--border-color);
+			padding: 30px 40px;
+			background-color: rgba(255, 255, 255, 0.9);
+			border-radius: 12px;
+			box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+			position: relative;
+			background-image: url('https://picsum.photos/id/106/1200/800');
+			background-size: cover;
+			background-blend-mode: overlay;
+		}
+		
+		/* 装饰边角 */
+		.container3::before, 
+		.container3::after {
+			content: "";
+			position: absolute;
+			width: 35px;
+			height: 35px;
+			border-color: var(--gold);
+			border-style: solid;
+			opacity: 0.6;
+		}
+		
+		.container3::before { top: 15px; left: 15px; border-width: 1px 0 0 1px; }
+		.container3::after { bottom: 15px; right: 15px; border-width: 0 1px 1px 0; }
+		
+		.title3 {
+			font-size: 28px;
+			font-weight: bold;
+			margin-bottom: 15px;
+			color: var(--primary);
+			font-family: "Ma Shan Zheng", cursive;
+			letter-spacing: 3px;
+			position: relative;
+			display: inline-block;
+		}
+		
+		.title3::after {
+			content: "";
+			position: absolute;
+			bottom: -8px;
+			left: 10%;
+			width: 80%;
+			height: 1px;
+			background: linear-gradient(90deg, transparent, var(--gold), transparent);
+		}
+		
+		.divider {
+			border-top: 1px dashed var(--border-color);
+			margin: 20px 0;
+			width: 60%;
+			margin-left: auto;
+			margin-right: auto;
+			position: relative;
+		}
+		
+		.divider::before {
+			content: "❦";
+			position: absolute;
+			top: -10px;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: rgba(255, 255, 255, 0.9);
+			color: var(--secondary);
+			padding: 0 10px;
+		}
+		
+		.content3 {
+			font-size: 16px;
+			line-height: 2;
+			text-align: justify;
+			font-family: "Noto Serif SC", serif;
+			color: var(--text-color);
+			text-indent: 2em;
+			max-width: 800px;
+			margin: 0 auto;
+		}
+		
+		/* 古风印章效果 */
+		.seal {
+			position: absolute;
+			width: 70px;
+			height: 70px;
+			right: 40px;
+			bottom: 30px;
+			background-color: rgba(205, 92, 92, 0.2);
+			border: 1px solid #CD5C5C;
+			border-radius: 5px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			transform: rotate(15deg);
+			color: #CD5C5C;
+			font-family: "Noto Serif SC", serif;
+			font-weight: bold;
+			font-size: 16px;
+			box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+		}
