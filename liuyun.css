@@ -33,7 +33,7 @@ body::before {
         .heading{
             width:100%;
             height:40vh;
-            min-height: 600px;
+            min-height: 400px;
             position: relative;
             overflow: hidden;
         }
@@ -339,4 +339,5 @@ body::before {
             }
 
         }
+
 
