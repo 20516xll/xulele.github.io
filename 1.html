@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>龙门礼·琉璃造</title>
+    <style>
+        /* 高级古风配色方案 */
+        :root {
+            --primary: #795548;      /* 深木色 */
+            --secondary: #C62828;    /* 赤红色 */
+            --accent: #2E7D32;       /* 青竹色 */
+            --bg-color: #F5F5DC;     /* 宣纸色 */
+            --text-color: #3E2723;   /* 墨色 */
+            --border-color: #A1887F; /* 木边框色 */
+            --gold: #D4AF37;         /* 描金色 */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        /* 轮播图容器样式 */
+        .container {
+            height: 41%;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border-color);
+            transition: all 0.5s ease;
+        }
+        
+        .container:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 古风装饰边角 */
+        .container::before, 
+        .container::after,
+        .story::before, 
+        .story::after {
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-color: var(--gold);
+            border-style: solid;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .container::before { top: 15px; left: 15px; border-width: 2px 0 0 2px; }
+        .container::after { bottom: 15px; right: 15px; border-width: 0 2px 2px 0; }
+        .story::before { top: 15px; left: 15px; border-width: 2px 0 0 2px; }
+        .story::after { bottom: 15px; right: 15px; border-width: 0 2px 2px 0; }
+        
+        .container .slide {
+            border-radius: 20px;
+        }
+        
+        .container .slide .item {
+            width: 200px;
+            height: 250px;
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+            border-radius: 20px;
+            box-shadow: 0 30px 50px #505050;
+            background-position: 50% 50%;
+            background-size: cover;
+            display: inline-block;
+            transition: all 0.5s;
+        }
+        
+        .slide .item:nth-child(1),
+        .slide .item:nth-child(2) {
+            top: 0;
+            left: 0;
+            transform: translate(0, 0);
+            border-radius: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            transition: all .5s;
+        }
+        
+        .slide .item:nth-child(3) {
+            left: 50%;
+        }
+        
+        .slide .item:nth-child(4) {
+            left: calc(50% + 220px);
+        }
+        
+        .slide .item:nth-child(5) {
+            left: calc(50% + 440px);
+        }
+        
+        .slide .item:nth-child(n + 6) {
+            left: calc(50% + 660px);
+            opacity: 0;
+        }
+        
+        .item .content {
+            position: absolute;
+            top: 50%;
+            left: 100px;
+            width: 300px;
+            text-align: left;
+            color: #eee;
+            transform: translate(0, -50%);
+            font-family: system-ui;
+            display: none;
+        }
+        
+        .slide .item:nth-child(2) .content {
+            display: block;
+        }
+        
+        .content .name {
+            font-size: 40px;
+            text-transform: uppercase;
+            font-weight: bold;
+            opacity: 0;
+            animation: animate 1s ease-in-out 1 forwards;
+        }
+        
+        .content .des {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: animate 1s ease-in-out 0.3s 1 forwards;
+        }
+        
+        .content button {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.673);
+            transition: all 0.5s;
+            animation: animate 1s ease-in-out 0.6s 1 forwards;
+        }
+        
+        .content button:hover {
+            background-color: rgb(255, 255, 255);
+        }
+        
+        @keyframes animate {
+            from {
+                opacity: 0;
+                transform: translate(0, 100px);
+                filter: blur(33px);
+            }
+            
+            to {
+                opacity: 1;
+                transform: translate(0);
+                filter: blur(0);
+            }
+        }
+        
+        .button {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            justify-content: center; /* 居中按钮 */
+            width: 100%;
+            position: absolute;
+            bottom: 20px;
+        }
+        
+        .button button {
+            width: 40px;
+            height: 35px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            margin: 0 5px;
+            border: 2px solid #000000bd;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.578);
+        }
+        
+        .button button:hover {
+            color: #000000;
+            border: 2px solid #ffffffbd;
+            transform: scale(1.1);
+        }
+        
+        .button button:focus {
+            transform: scale(1.1);
+            background: #ffffff;
+            border: 2px solid #ffffffbd;
+        }
+        
+        .button button:active {
+            transform: scale(1.02);
+        }
+        
+        .next {
+            padding: 0 0 0 3px;
+        }
+        
+        .prev {
+            padding: 0 3px 0 0;
+        }
+        
+        .MDJAminDiv {
+            z-index: 4444;
+            position: fixed;
+            bottom: 5%;
+            left: 2%;
+        }
+        
+        .MDJAmin {
+            text-decoration: none;
+            border-bottom: 1px dashed rgb(44, 44, 44);
+            border-top: 1px dashed rgb(44, 44, 44);
+            padding: 4px 0;
+            color: rgba(44, 44, 44, 0.525);
+            font-family: monospace;
+            font-style: italic;
+            font-size: 1.1em;
+            transition: all 0.5s;
+        }
+        
+        .MDJAmin:hover {
+            color: #000000;
+        }
+
+        /* 页面布局样式 */
+        main {
+            background-image: url('./image/backgroundimage.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        /* 主容器样式优化 */
+        .container1{
+            display: flex;
+            height:800px;
+            padding: 0 60px;
+            margin-top: 30px;
+            gap: 20px;
+        }
+        
+        .left{
+            flex:5.5;
+            background-color:transparent;
+            padding:15px;
+            position: relative;
+        }
+        
+        /* 标题栏样式 */
+        .center{
+            height: 5%;
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            padding-top: 15px;
+            margin: 15px 0;
+            font-family: "Ma Shan Zheng", cursive;
+            letter-spacing: 2px;
+            position: relative;
+        }
+        
+        .center::before {
+            content: "❦";
+            margin-right: 12px;
+            color: var(--secondary);
+        }
+        
+        .center::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+        }
+        
+        .bottom{
+            height:54%;
+            width: 100%;
+            background-color:transparent;
+            overflow: hidden;
+        }
+        
+        .right{
+            flex:4.5;
+            padding: 15px;
+            background-color: transparent;
+            position: relative;
+        }
+        
+        /* 故事卡片高级样式 */
+        .story{
+            background-color: rgba(255, 255, 255, 0.9);
+            height:100%;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+        
+        .story:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .story1{
+            height:86%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* 图片渐变遮罩 */
+        .story1::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            z-index: 1;
+        }
+        
+        .story_caption {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            color: white;
+            z-index: 2;
+            font-family: "Noto Serif SC", serif;
+            max-width: 80%;
+        }
+        
+        .story_caption h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+            position: relative;
+            padding-bottom: 8px;
+        }
+        
+        .story_caption h3::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 1px;
+            background-color: rgba(255,255,255,0.7);
+        }
+        
+        .story_caption p {
+            font-size: 15px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+            line-height: 1.6;
+        }
+        
+        .story_image{
+            width:100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 7s ease;
+        }
+        
+        .story:hover .story_image {
+            transform: scale(1.1);
+        }
+        
+        .story2{
+            height:14%;
+            padding: 0 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-sizing: border-box;
+            background-color: rgba(245, 240, 230, 0.95);
+        }
+        
+        .story2_title{
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: "Noto Serif SC", serif;
+            margin-bottom: 5px;
+        }
+        
+        .story2_desc{
+            font-size: 13px;
+            color: var(--text-color);
+            font-family: "Noto Serif SC", serif;
+            margin-bottom: 10px;
+        }
+        
+        /* 修改按钮样式 */
+        .story2_btn{
+            
+            color: white;
+            border: none;
+            padding: 6px 12px; /* 减小尺寸 */
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: "Noto Serif SC", serif;
+            transition: all 0.3s ease;
+            background-color: #e89f72; /* 浅粉色背景 */
+    border: 1px solid #eab17e; /* 浅粉色边框 */
+            position: relative;
+            overflow: hidden;
+            align-self: flex-end; /* 靠右对齐 */
+            margin-left: auto; /* 自动左边距，实现右对齐 */
+        }
+        
+        /* 保持其他按钮效果不变 */
+        .story2_btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .story2_btn:hover {
+            background-color: #f0a68f; /* hover时的深一点的粉色 */
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(27, 94, 32, 0.3);
+        }
+        
+        .story2_btn:hover::before {
+            left: 100%;
+        }
+        
+        /* 产品表格样式 */
+        table{
+            border-collapse: separate;
+            border-spacing: 15px;
+            background-color: transparent;
+            border:none;
+            width: 100%;
+            height:100%;
+        }
+        
+        .td1{
+            border:none;
+            padding:0;
+        }
+        
+        /* 产品卡片高级样式 */
+        .sell{
+            display: flex;
+            width: 100%;
+            border-radius: 10px;
+            border:1px solid var(--border-color);
+            overflow: hidden;
+            background-color: white;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .sell::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: left center;
+        }
+        
+        .sell:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .sell:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .sell_left{
+            flex:8;
+            height: 190px;
+            background-color: antiquewhite;
+            overflow: hidden;
+            border-right: 1px solid var(--border-color);
+        }
+        
+        .good_img{
+            width:100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+            transform-origin: center center;
+        }
+        
+        .sell_left:hover .good_img {
+            transform: scale(1.15);
+        }
+        
+        .sell_right{
+            flex:2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 5px;
+            writing-mode: vertical-rl;
+            background-color: rgba(245, 240, 230, 0.7);
+        }
+        
+        .product_name {
+            font-size: 16px;
+            font-weight:700;
+            color: var(--primary);
+            font-family: "Noto Serif SC", serif;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            position: relative;
+            padding-right: 10px;
+        }
+        
+        .product_name::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background-color: rgba(139, 90, 43, 0.3);
+        }
+        
+        .product_price {
+            font-size: 15px;
+            color: var(--secondary);
+            font-family: "Noto Serif SC", serif;
+            font-weight: 600;
+            padding-right: 10px;
+        }
+        
+        /* 匠人自述区域 */
+        .container3 {
+            width: 70%;
+            margin: 40px auto;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            padding: 30px 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            background-image: url('https://picsum.photos/id/106/1200/800');
+            background-size: cover;
+            background-blend-mode: overlay;
+        }
+        
+        /* 装饰边角 */
+        .container3::before, 
+        .container3::after {
+            content: "";
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            border-color: var(--gold);
+            border-style: solid;
+            opacity: 0.6;
+        }
+        
+        .container3::before { top: 15px; left: 15px; border-width: 1px 0 0 1px; }
+        .container3::after { bottom: 15px; right: 15px; border-width: 0 1px 1px 0; }
+        
+        .title3 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-family: "Ma Shan Zheng", cursive;
+            letter-spacing: 3px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .title3::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 10%;
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        
+        .divider {
+            border-top: 1px dashed var(--border-color);
+            margin: 20px 0;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: "❦";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--secondary);
+            padding: 0 10px;
+        }
+        
+        .content3 {
+            font-size: 16px;
+            line-height: 2;
+            text-align: justify;
+            font-family: "Noto Serif SC", serif;
+            color: var(--text-color);
+            text-indent: 2em;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 古风印章效果 */
+        .seal {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            right: 40px;
+            bottom: 30px;
+            background-color: rgba(205, 92, 92, 0.2);
+            border: 1px solid #CD5C5C;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: rotate(15deg);
+            color: #CD5C5C;
+            font-family: "Noto Serif SC", serif;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 1024px) {
+            .container1 {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .bottom {
+                margin-top: 20px;
+            }
+            
+            table {
+                border-spacing: 10px;
+            }
+            
+            .container3 {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container1">
+            <div class="left">
+                <!-- 轮播图容器 -->
+                <div class="container">
+                    <div class="slide">
+                        <div class="item" style="background-image: url('https://picsum.photos/id/118/1200/800');">
+                            <div class="content">
+                                <div class="name">缠枝莲纹琉璃瓶</div>
+                                <div class="des">传承古法工艺，融合现代审美，每一件作品都独一无二</div>
+                                <button>了解详情</button>
+                            </div>
+                        </div>
+                        
+                        <div class="item" style="background-image: url('https://picsum.photos/id/119/1200/800');">
+                            <div class="content">
+                                <div class="name">云纹琉璃盏</div>
+                                <div class="des">温润如玉，光彩照人，尽显东方美学精髓</div>
+                                <button>了解详情</button>
+                            </div>
+                        </div>
+                        
+                        <div class="item" style="background-image: url('https://picsum.photos/id/129/1200/800');">
+                            <div class="content">
+                                <div class="name">龙凤呈祥琉璃璧</div>
+                                <div class="des">寓意吉祥，工艺精湛，是收藏与馈赠之佳品</div>
+                                <button>了解详情</button>
+                            </div>
+                        </div>
+                        
+                        <div class="item" style="background-image: url('https://picsum.photos/id/133/1200/800');">
+                            <div class="content">
+                                <div class="name">如意纹香薰炉</div>
+                                <div class="des">古朴典雅，香气袅袅，营造宁静祥和之氛围</div>
+                                <button>了解详情</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="button">
+                        <button class="prev">◁</button>
+                        <button class="next">▷</button>
+                    </div>
+                </div>
+                
+                <div class="center">龙门礼·琉璃造精品推荐</div>
+                
+                <div class="bottom">
+                    <table>
+                        <tr class="tr1">
+                            <td class="td1">
+                                <div class="sell">
+                                    <div class="sell_left">
+                                        <img src="https://picsum.photos/id/118/600/400" class="good_img" alt="缠枝莲纹琉璃瓶">
+                                    </div>
+                                    <div class="sell_right">
+                                        <div class="product_price">¥2,680</div>
+                                        <div class="product_name">缠枝莲纹琉璃瓶</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="td1">
+                                <div class="sell">
+                                    <div class="sell_left">
+                                        <img src="https://picsum.photos/id/119/600/400" class="good_img" alt="云纹琉璃盏">
+                                    </div>
+                                    <div class="sell_right">
+                                        <div class="product_price">¥1,980</div>
+                                        <div class="product_name">云纹琉璃盏</div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="tr1">
+                            <td class="td1">
+                                <div class="sell">
+                                    <div class="sell_left">
+                                        <img src="https://picsum.photos/id/129/600/400" class="good_img" alt="龙凤呈祥琉璃璧">
+                                    </div>
+                                    <div class="sell_right">
+                                        <div class="product_price">¥3,280</div>
+                                        <div class="product_name">龙凤呈祥琉璃璧</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="td1">
+                                <div class="sell">
+                                    <div class="sell_left">
+                                        <img src="https://picsum.photos/id/133/600/400" class="good_img" alt="如意纹香薰炉">
+                                    </div>
+                                    <div class="sell_right">
+                                        <div class="product_price">¥2,180</div>
+                                        <div class="product_name">如意纹香薰炉</div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="story">
+                    <div class="story1">
+                        <img src="https://picsum.photos/id/175/800/500" class="story_image" alt="古法琉璃制作场景">
+                        <div class="story_caption">
+                            <h3>千年琉璃 匠心传承</h3>
+                            <p>河津灰陶琉璃技艺始于唐代，至今已有千年历史，每一件作品都凝聚着匠人的心血与智慧</p>
+                        </div>
+                    </div>
+                    <div class="story2">
+                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                            <div>
+                                <div class="story2_title">河津灰陶琉璃的故事</div>
+                                <div class="story2_desc">采天地之灵气，融古今之技艺，传千年之匠心。</div>
+                            </div>
+                            <button class="story2_btn">探索千年技艺→</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container3">
+            <div class="title3">匠人自述</div>
+            <div class="divider"></div>
+            <div class="content3">
+                欢迎来到我的灰陶琉璃世界！余乃河津灰陶琉璃第七代传人，痴于此艺三十余载。自盛唐以降，此技传于吾乡，历千年而不衰。每一件琉璃，必经七十二道工序，方得成品。选料必取太行之石英，烧制须守松木之火候，塑形全凭掌上之功夫。<br><br>
+                琉璃者，火之精，土之魂，水之魄也。其间蕴含之妙，非言语可尽述。今愿以匠心之作，会天下知音。若有雅好者，或欲探其奥者，不妨驻足细品，或与吾一叙，共赏此中真趣。
+            </div>
+            <div class="seal">明远<br>手制</div>
+        </div>
+    </main>
+
+    <script>
+        "use strict";
+
+        let next = document.querySelector(".next");
+        let prev = document.querySelector(".prev");
+
+        next.addEventListener("click", function () {
+            let items = document.querySelectorAll(".item");
+            document.querySelector(".slide").appendChild(items[0]);
+        });
+
+        prev.addEventListener("click", function () {
+            let items = document.querySelectorAll(".item");
+            document.querySelector(".slide").prepend(items[items.length - 1]);
+        });
+
+        // 自动轮播
+        setInterval(() => {
+            let items = document.querySelectorAll(".item");
+            document.querySelector(".slide").appendChild(items[0]);
+        }, 5000);
+    </script>
+</body>
+</html>
+    
