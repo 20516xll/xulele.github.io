@@ -1,0 +1,87 @@
+@layer utilities {
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .ceramic-shadow {
+        box-shadow: 0 4px 15px rgba(128, 64, 0, 0.15);
+    }
+    .ornament-bg {
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23804000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        background-color: #FCF8F2;
+    }
+    .collection-card-hover {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .collection-card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 20px rgba(128, 64, 0, 0.2);
+    }
+    .btn-vertical-text {
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+    }
+    .modal-enter {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    .modal-enter-active {
+        opacity: 1;
+        transform: scale(1);
+        transition: opacity 300ms, transform 300ms;
+    }
+    .modal-exit {
+        opacity: 1;
+    }
+    .modal-exit-active {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: opacity 300ms, transform 300ms;
+    }
+    /* 新增动画类 */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in.appear {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .scale-in {
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .scale-in.appear {
+        opacity: 1;
+        transform: scale(1);
+    }
+    .checkin-pulse {
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(128, 64, 0, 0.4);
+        }
+        70% {
+            box-shadow: 0 0 0 10px rgba(128, 64, 0, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(128, 64, 0, 0);
+        }
+    }
+    .profile-hover {
+        transition: all 0.3s ease;
+    }
+    .profile-hover:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 16px rgba(128, 64, 0, 0.1);
+    }
+    .image-upload-overlay {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .image-upload-container:hover .image-upload-overlay {
+        opacity: 1;
+    }
+}

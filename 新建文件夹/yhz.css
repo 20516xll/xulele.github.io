@@ -1,0 +1,70 @@
+@layer utilities {
+    .bg-texture {
+        background-image: url('图片/千年yhz.jpg');
+        background-size: cover;
+        background-position: center;
+        background-blend-mode: overlay;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .ceramic-border {
+        border-image: url('https://picsum.photos/id/131/200/200') 30 stretch;
+    }
+    .text-shadow {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .card-hover {
+        transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    /* 纸质纹理效果 - 纯CSS实现 */
+    .paper-texture {
+        /* 基础米白色背景 */
+        background-color: theme('colors.light');
+        
+        /* 纤维纹理 - 多层线性渐变模拟纸张纤维 */
+        background-image: 
+            linear-gradient(rgba(139, 90, 43, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(139, 90, 43, 0.03) 1px, transparent 1px),
+            /* 细微噪点纹理 */
+            radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+        
+        /* 控制纹理密度 */
+        background-size: 
+            50px 50px,   /* 纤维纹理密度 */
+            50px 50px,   /* 纤维纹理密度 */
+            20px 20px;   /* 噪点密度 */
+        
+        position: relative;
+    }
+    
+    /* 纸张褶皱效果 */
+    .paper-texture::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: 
+            linear-gradient(45deg, rgba(210, 180, 140, 0.05) 25%, transparent 25%),
+            linear-gradient(-45deg, rgba(210, 180, 140, 0.05) 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, rgba(210, 180, 140, 0.05) 75%),
+            linear-gradient(-45deg, transparent 75%, rgba(210, 180, 140, 0.05) 75%);
+        background-size: 40px 40px;
+        background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+        pointer-events: none; /* 不影响交互 */
+    }
+    
+    /* 底层纹理容器 */
+    .texture-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* 确保在最底层 */
+    }
+}

@@ -1,0 +1,340 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+    font-family: "Noto Serif SC", serif;
+    background-color: #f9f7f5;
+    color: #5d4037;
+    line-height: 1.8;
+    position: relative; /* 新增：为伪元素提供定位上下文 */
+}
+
+/* 新增：使用伪元素实现带透明度的背景图 */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./image/back2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3; /* 调整透明度，值越小越透明（0-1之间） */
+    z-index: -1; /* 确保背景图在内容下方 */
+}
+        
+        /* 顶部大图区域 */
+        .heading{
+            width:100%;
+            height:70vh;
+            min-height: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+        .heading img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.02);
+            transition: transform 8s ease;
+        }
+        .heading:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* 页面容器 - 限制最大宽度并居中 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* 内容块样式 - 提高透明度 */
+        .introduction, .display, .product, .interaction {
+            width: 80%;
+            margin: 3rem auto;
+            background-color: rgba(212, 225, 228, 0.95); /* 提高透明度 */
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(5px); /* 添加毛玻璃效果增强可读性 */
+        }
+        
+        .introduction, .display, .product, .interaction:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            background-color: rgba(212, 225, 228, 0.98); /* 悬停时进一步提高透明度 */
+        }
+        
+        /* 调整introduction位置，使其与heading重叠 */
+        .introduction {
+            margin: -120px auto 4rem;
+            border-top: 1px solid rgba(255,255,255,0.8);
+            background-color: rgba(212, 225, 228, 0.95);
+            backdrop-filter: blur(5px);
+        }
+
+        /* 装饰性线条 */
+        .introduction::before,
+        .display::before,
+        .product::before,
+        .interaction::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background:transparent;
+        }
+        
+        /* 标题样式 */
+        .title {
+            height: auto;
+            padding: 0 0 1rem 0;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            color: #5a3d2b; /* 调整标题颜色，更贴近水墨画色调 */
+            font-size: 32px;
+            border-bottom: 1px solid rgba(90, 61, 43, 0.15);
+            position: relative;
+            display: inline-block;
+        }
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: #8a7968; /* 调整下划线颜色，更协调 */
+        }
+        
+        /* 内容区样式 - 提高透明度 */
+        .contend1, .contend2, .contend3, .contend4 {
+            height: auto;
+            padding: 2rem;
+            border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.95); /* 内容区半透明白色背景，提高透明度 */
+            color: #5d4037;
+            line-height: 1.8;
+            font-size: 16px;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+        .introduction:hover .contend1,
+        .display:hover .contend2,
+        .product:hover .contend3,
+        .interaction:hover .contend4 {
+            transform: translateY(-5px);
+            box-shadow: inset 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* display 模块样式调整 - 更小尺寸并添加背景图 */
+        .display {
+            padding: 2rem;
+        }
+        
+        .contend2 {
+            background-image: url('https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/8d47a14e9fb04238a7df93fd9c813c5a.jpg~tplv-a9rns2rl98-24:720:720.image?rk3s=1fb89129&x-expires=1758779466&x-signature=K04cWd4BXo%2Bp8tn8OY%2F0EyomVXc%3D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 添加半透明遮罩，确保文字清晰可读 */
+        .contend2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.95); /* 提高遮罩透明度 */
+            z-index: 1;
+        }
+        
+        .features-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-desc {
+            margin-bottom: 2rem;
+            font-size: 17px;
+            line-height: 1.9;
+        }
+        
+        /* 功能展示的多图布局 - 更小的图片尺寸 */
+        .features-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 2rem;
+        }
+        
+        .feature-img {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .feature-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        .feature-img:hover img {
+            transform: scale(1.05);
+        }
+        .feature-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: #fff;
+            font-size: 22px;
+            text-align: center;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        .feature-img:hover .feature-caption {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* product 模块 2x2 布局 - 电脑端更宽松 */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        .product-item {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+        .product-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+        .product-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+        .product-item:hover img {
+            transform: scale(1.08);
+        }
+        .product-name {
+            padding: 15px;
+            text-align: center;
+            color: #5d4037;
+            font-weight: 600;
+            font-size: 18px;
+            background-color: rgba(249, 247, 245, 0.95); /* 提高透明度 */
+        }
+        
+        /* interaction 模块按钮样式 */
+        .btn-group {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .btn {
+            padding: 15px 40px;
+            border-radius: 8px;
+            border: none;
+            background: linear-gradient(120deg, #5a7f8c, #8a7d9e);
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Noto Serif SC", serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(138, 125, 158, 0.4);
+            background: linear-gradient(120deg, #4d6f7a, #7a6d8e);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 1200px) {
+            .introduction, .display, .product, .interaction {
+                width: 90%;
+                padding: 2.5rem;
+            }
+            .product-item img {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .features-container {
+                flex-direction: column;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 80%;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .heading {
+                height: 50vh;
+                min-height: 400px;
+            }
+            .introduction, .display, .product, .interaction {
+                width: 95%;
+                padding: 1.5rem;
+                margin: 2rem auto;
+            }
+            .introduction {
+                margin: -50px auto 2rem;
+            }
+            .title {
+                font-size: 26px;
+            }
+            .contend1, .contend2, .contend3, .contend4 {
+                padding: 1.2rem;
+                font-size: 15px;
+            }
+            .feature-img {
+                height: 300px;
+            }
+            .product-item img {
+                height: 200px;
+            }
+        }
