@@ -32,7 +32,7 @@ body::before {
         /* 顶部大图区域 */
         .heading{
             width:100%;
-            height:70vh;
+            height:40vh;
             min-height: 600px;
             position: relative;
             overflow: hidden;
@@ -339,3 +339,4 @@ body::before {
             }
 
         }
+
