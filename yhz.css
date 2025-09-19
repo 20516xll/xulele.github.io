@@ -1,6 +1,6 @@
 @layer utilities {
     .bg-texture {
-        background-image: url('图片/千年yhz.jpg');
+        background-image: url('千年yhz.jpg');
         background-size: cover;
         background-position: center;
         background-blend-mode: overlay;
@@ -68,3 +68,4 @@
         z-index: -1; /* 确保在最底层 */
     }
 }
+
