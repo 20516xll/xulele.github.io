@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>藏品阁 - 龙门琉云坊</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="cp.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#804000',      // 深棕木色，与瓦当图案协调
+                        secondary: '#D9B38C',    // 棕褐色，温暖柔和
+                        accent: '#A65C32',       // 陶土色，体现陶瓷质感
+                        light: '#F9F5F0',        // 米白色，柔和背景
+                        dark: '#4A3124',         // 深棕色，文字主色
+                        ceramic: '#B36B35',      // 陶瓷色，强调元素
+                        red: '#A62928',          // 入窑红色
+                        blue: '#165DFF'          // 理窑蓝色
+                    },
+                    fontFamily: {
+                        song: ['SimSun', 'serif'],
+                        kai: ['KaiTi', 'STKaiti', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light font-song text-dark min-h-screen flex flex-col">
+    <!-- 传统瓦当图案背景 -->
+    <div class="fixed inset-0 bg-cover bg-center opacity-10 pointer-events-none" 
+         style="background-image: url('https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/89cd38443cf64ec795acdcfb03baa20e.jpg~tplv-a9rns2rl98-24:720:720.image?rk3s=1fb89129&x-expires=1758779716&x-signature=MRKyNs%2Bmo67WHgK080OYjrOrVz8%3D'); z-index: -1;"></div>
+    
+    <!-- 主内容区 -->
+    <main class="flex-grow container mx-auto px-6 py-8">
+        <!-- 个人资料卡片 -->
+        <section class="bg-white/80 backdrop-blur-sm rounded-xl p-6 md:p-8 ceramic-shadow max-w-5xl mx-auto mb-10 fade-in profile-hover">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <!-- 头像区域 -->
+                <div class="image-upload-container relative">
+                    <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-secondary/30">
+                        <img id="profile-avatar" src="图片/头像.jpg" alt="用户头像" class="w-full h-full object-cover">
+                        <div class="image-upload-overlay absolute inset-0 bg-black/50 flex items-center justify-center cursor-pointer">
+                            <i class="fa fa-camera text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <input type="file" id="avatar-upload" accept="image/*" class="hidden">
+                    <p class="text-sm text-gray-500 mt-2 text-center">点击更换头像</p>
+                </div>
+                
+                <!-- 个人信息 -->
+                <div class="flex-1 text-center md:text-left">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-kai font-bold text-primary" id="profile-name">龙门匠人</h2>
+                            <p class="text-gray-600" id="profile-title">陶瓷工艺师 · 收藏爱好者</p>
+                        </div>
+                        <button id="edit-profile-btn" class="bg-primary/10 hover:bg-primary/20 text-primary px-5 py-2 rounded-md transition-colors duration-300 self-center md:self-auto">
+                            <i class="fa fa-pencil mr-1"></i> 编辑资料
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-4 mt-6">
+                        <div class="bg-light/70 rounded-lg p-3">
+                            <p class="text-2xl font-bold text-primary" id="stats-collections">2</p>
+                            <p class="text-gray-600 text-sm">我的藏品</p>
+                        </div>
+                        <div class="bg-light/70 rounded-lg p-3">
+                            <p class="text-2xl font-bold text-primary" id="stats-visited">15</p>
+                            <p class="text-gray-600 text-sm">参观记录</p>
+                        </div>
+                        <div class="bg-light/70 rounded-lg p-3">
+                            <p class="text-2xl font-bold text-primary" id="stats-favorites">8</p>
+                            <p class="text-gray-600 text-sm">收藏精品</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 打卡页面 -->
+        <section id="checkin-section" class="bg-white/80 backdrop-blur-sm rounded-xl p-6 md:p-10 ceramic-shadow max-w-5xl mx-auto mb-10 fade-in">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-3xl font-kai font-bold text-primary mb-4">今日参观打卡</h2>
+                    <p class="text-gray-600 mb-6">记录您的参观足迹，参与我们的陶瓷文化体验活动，累积打卡可获得精美纪念品。</p>
+                    
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="flex -space-x-2">
+                            <img src="图片/头像.jpg" alt="已打卡用户" class="w-10 h-10 rounded-full border-2 border-white">
+                            <img src="https://picsum.photos/id/65/100/100" alt="已打卡用户" class="w-10 h-10 rounded-full border-2 border-white">
+                            <img src="https://picsum.photos/id/66/100/100" alt="已打卡用户" class="w-10 h-10 rounded-full border-2 border-white">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 border-2 border-white flex items-center justify-center text-primary text-xs font-medium">
+                                +28
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500">今日已有31人打卡参观</p>
+                    </div>
+                    
+                    <button id="checkin-btn" class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg transition-all duration-300 text-lg font-medium checkin-pulse">
+                        <i class="fa fa-map-marker mr-2"></i> 点击打卡
+                    </button>
+                </div>
+                
+                <div class="w-full md:w-1/2 relative h-64 md:h-80 rounded-lg overflow-hidden shadow-lg">
+                    <img src="图片/底1.jpg" alt="工坊景观" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                        <div class="p-4 text-white">
+                            <p class="font-medium">龙门琉云坊 - 主展厅</p>
+                            <p class="text-sm text-white/80">今日开放时间: 09:00 - 17:30</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 打卡成功提示 (默认隐藏) -->
+            <div id="checkin-success" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
+                <div class="flex items-center">
+                    <i class="fa fa-check-circle text-xl mr-2"></i>
+                    <p>打卡成功！您是今日第 <span id="checkin-count" class="font-bold">32</span> 位参观者</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 藏品阁标题区 -->
+        <div class="mb-10 flex justify-between items-center fade-in">
+            <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                    <i class="fa fa-diamond text-primary"></i>
+                </div>
+                <h2 class="text-3xl font-kai font-bold text-primary">藏品阁</h2>
+                <span class="ml-3 text-gray-500 bg-gray-100 px-3 py-1 rounded-full text-sm">2件</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-600 hover:text-primary transition-colors duration-300">
+                    <i class="fa fa-th-large mr-1"></i> 网格视图
+                </button>
+                <button class="text-gray-600 hover:text-primary transition-colors duration-300">
+                    <i class="fa fa-list mr-1"></i> 列表视图
+                </button>
+            </div>
+        </div>
+
+        <!-- 藏品展示区 -->
+        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 md:p-8 ceramic-shadow max-w-5xl mx-auto relative fade-in">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 藏品1 -->
+                <div class="collection-card-hover bg-light/50 rounded-lg overflow-hidden border border-secondary/20 scale-in">
+                    <div class="h-64 overflow-hidden bg-gray-100">
+                        <img src="图片/藏品1.jpg" 
+                             alt="珐华绿釉双螭龙簋" 
+                             class="w-full h-full object-contain p-4 transition-transform duration-700 hover:scale-110">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-primary mb-2 font-kai">珐华绿釉双螭龙簋</h3>
+                        <div class="flex items-center justify-between mt-4">
+                            <div class="flex items-center text-gray-600">
+                                <i class="fa fa-coins text-amber-600 mr-2"></i>
+                                <span class="font-medium">1420</span>
+                            </div>
+                            <button class="bg-primary/10 hover:bg-primary/20 text-primary px-3 py-1 rounded-md transition-colors duration-300 view-details" data-id="1">
+                                <i class="fa fa-eye mr-1"></i> 查看详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 藏品2 -->
+                <div class="collection-card-hover bg-light/50 rounded-lg overflow-hidden border border-secondary/20 scale-in" style="transition-delay: 0.2s">
+                    <div class="h-64 overflow-hidden bg-gray-100">
+                        <img src="图片/藏品2_522.jpg" 
+                             alt="彩云龙纹兽首三足" 
+                             class="w-full h-full object-contain p-4 transition-transform duration-700 hover:scale-110">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-primary mb-2 font-kai">彩云龙纹兽首三足</h3>
+                        <div class="flex items-center justify-between mt-4">
+                            <div class="flex items-center text-gray-600">
+                                <i class="fa fa-coins text-amber-600 mr-2"></i>
+                                <span class="font-medium">980</span>
+                            </div>
+                            <button class="bg-primary/10 hover:bg-primary/20 text-primary px-3 py-1 rounded-md transition-colors duration-300 view-details" data-id="2">
+                                <i class="fa fa-eye mr-1"></i> 查看详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 藏品3占位(预留位置) -->
+                <div class="collection-card-hover bg-light/30 rounded-lg overflow-hidden border-2 border-dashed border-secondary/30 flex flex-col items-center justify-center h-full p-5 scale-in" style="transition-delay: 0.4s">
+                    <div class="w-20 h-20 rounded-full bg-secondary/10 flex items-center justify-center mb-4">
+                        <i class="fa fa-plus text-2xl text-primary/50"></i>
+                    </div>
+                    <p class="text-gray-400 text-center">添加新藏品</p>
+                </div>
+            </div>
+
+            <!-- 右侧功能按钮 -->
+            <div class="absolute -right-10 top-1/2 transform -translate-y-1/2 flex flex-col space-y-4">
+                <button class="w-14 h-14 rounded-full bg-red text-white shadow-lg hover:bg-red/90 transition-all duration-300 flex items-center justify-center cursor-pointer">
+                    <span class="btn-vertical-text font-medium">入窑</span>
+                </button>
+                <button class="w-14 h-14 rounded-full bg-blue text-white shadow-lg hover:bg-blue/90 transition-all duration-300 flex items-center justify-center cursor-pointer">
+                    <span class="btn-vertical-text font-medium">理窑</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 工坊信息区 -->
+        <div class="mt-10 max-w-5xl mx-auto fade-in">
+            <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 ceramic-shadow">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="flex items-center mb-6 md:mb-0 md:mr-8 scale-in">
+                        <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-secondary/30 mr-4">
+                            <img src="图片/头像.jpg" alt="工坊匠人" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-primary font-kai">关于我们</h3>
+                            <p class="text-gray-600 text-sm">传承千年陶瓷工艺</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-6 md:gap-10 flex-1">
+                        <div class="flex flex-col items-center scale-in" style="transition-delay: 0.1s">
+                            <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+                                <i class="fa fa-shopping-bag text-primary text-xl"></i>
+                            </div>
+                            <span class="text-gray-700 font-medium">人气商城</span>
+                        </div>
+                        
+                        <div class="flex flex-col items-center scale-in" style="transition-delay: 0.2s">
+                            <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+                                <i class="fa fa-fire text-primary text-xl"></i>
+                            </div>
+                            <span class="text-gray-700 font-medium">窑火工坊</span>
+                        </div>
+                        
+                        <div class="flex flex-col items-center scale-in" style="transition-delay: 0.3s">
+                            <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+                                <i class="fa fa-users text-primary text-xl"></i>
+                            </div>
+                            <span class="text-gray-700 font-medium">匠人团队</span>
+                        </div>
+                        
+                        <div class="flex flex-col items-center scale-in" style="transition-delay: 0.4s">
+                            <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+                                <i class="fa fa-history text-primary text-xl"></i>
+                            </div>
+                            <span class="text-gray-700 font-medium">历史传承</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 藏品详情模态框 -->
+    <div id="collection-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-light rounded-xl max-w-4xl w-full max-h-[90vh] overflow-auto m-4 transform scale-95 transition-transform duration-300">
+            <div class="relative">
+                <!-- 关闭按钮 -->
+                <button id="close-modal" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-primary flex items-center justify-center shadow-md z-10 transition-colors">
+                    <i class="fa fa-times"></i>
+                </button>
+                
+                <!-- 模态框内容 -->
+                <div id="modal-content" class="p-6 md:p-8">
+                    <!-- 内容将通过JS动态填充 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑个人资料模态框 -->
+    <div id="profile-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-light rounded-xl max-w-2xl w-full max-h-[90vh] overflow-auto m-4 transform scale-95 transition-transform duration-300">
+            <div class="relative">
+                <!-- 关闭按钮 -->
+                <button id="close-profile-modal" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-primary flex items-center justify-center shadow-md z-10 transition-colors">
+                    <i class="fa fa-times"></i>
+                </button>
+                
+                <!-- 模态框内容 -->
+                <div class="p-6 md:p-8">
+                    <h2 class="text-2xl font-kai font-bold text-primary mb-6">编辑个人资料</h2>
+                    
+                    <form id="profile-form">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                            <!-- 头像预览 -->
+                            <div class="md:col-span-1 flex flex-col items-center">
+                                <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-secondary/30 mb-4">
+                                    <img id="profile-preview" src="https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/8d47a14e9fb04238a7df93fd9c813c5a.jpg~tplv-a9rns2rl98-24:720:720.image?rk3s=1fb89129&x-expires=1758779466&x-signature=K04cWd4BXo%2Bp8tn8OY%2F0EyomVXc%3D" alt="头像预览" class="w-full h-full object-cover">
+                                </div>
+                                <div class="relative">
+                                    <button type="button" class="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-md transition-colors duration-300">
+                                        <i class="fa fa-upload mr-1"></i> 更换头像
+                                    </button>
+                                    <input type="file" id="profile-upload" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                                </div>
+                            </div>
+                            
+                            <!-- 个人信息表单 -->
+                            <div class="md:col-span-2 space-y-4">
+                                <div>
+                                    <label for="fullname" class="block text-gray-700 mb-1">姓名</label>
+                                    <input type="text" id="fullname" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50" value="龙门匠人">
+                                </div>
+                                
+                                <div>
+                                    <label for="title" class="block text-gray-700 mb-1">头衔/职业</label>
+                                    <input type="text" id="title" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50" value="陶瓷工艺师 · 收藏爱好者">
+                                </div>
+                                
+                                <div>
+                                    <label for="bio" class="block text-gray-700 mb-1">个人简介</label>
+                                    <textarea id="bio" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50">专注陶瓷收藏与研究二十余年，热爱传统工艺，致力于传承和发扬中国陶瓷文化。</textarea>
+                                </div>
+                                
+                                <div>
+                                    <label for="location" class="block text-gray-700 mb-1">所在地</label>
+                                    <input type="text" id="location" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50" value="景德镇">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+                            <button type="button" id="cancel-profile" class="px-5 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors duration-300">取消</button>
+                            <button type="submit" class="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary/90 transition-colors duration-300">保存修改</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="cp.js"></script>
+</body>
+</html>
